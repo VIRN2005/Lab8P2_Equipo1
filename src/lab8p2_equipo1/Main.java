@@ -1,15 +1,13 @@
-
 package lab8p2_equipo1;
-
 
 public class Main extends javax.swing.JFrame {
 
-    
     public Main() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.pack();        
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -74,7 +72,6 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
