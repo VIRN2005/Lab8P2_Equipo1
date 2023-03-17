@@ -22,7 +22,7 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -44,15 +44,19 @@ public class Main extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 140));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 630, 0));
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 0, 740, 140);
+        jPanel1.add(jSeparator1);
+        jSeparator1.setBounds(0, 140, 630, 0);
 
         jButton1.setFont(new java.awt.Font("Impact", 0, 48)); // NOI18N
         jButton1.setText("Universo a Cargar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 410, 80));
+        jPanel1.add(jButton1);
+        jButton1.setBounds(20, 370, 410, 80);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lab8p2_equipo1/Images/Samurai.jpg"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 740, 340));
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, 140, 740, 340);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
