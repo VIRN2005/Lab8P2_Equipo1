@@ -1,8 +1,10 @@
 package lab8p2_equipo1;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Universo {
+public class Universo implements Serializable {
+
     private String nombre;
     private ArrayList<SerVivo> SeresVivos = new ArrayList();
 
@@ -31,29 +33,28 @@ public class Universo {
 
     @Override
     public String toString() {
-        return nombre ;
+        return nombre;
     }
-    
-    public void coso(){
-        Dba db = new Dba("./Universos.mdb");
-        String nombreuni = "";
-        AdminUniverso au = new AdminUniverso(nombre);
-    db.conectar();
-        try {
-            String n,d;
-            for (int i = 0; i < au.getUni().get(0).getSeresVivos().size(); i++) {
-                n = au.getUni().get(0).getSeresVivos().get(i).getNombre();
-                d = au.getUni().get(0).getSeresVivos().get(i).getUniProcedencia().getNombre();
-                db.query.execute("INSERT INTO Seres Vivos"
-                    + " (Nombre,Universo)"
-                    + " VALUES ('" + n + "', '" + d + "')");
-            db.commit();
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        db.desconectar();
-    }
-    
-    
+
+//    public void coso(){
+//        Dba db = new Dba("./Universos.mdb");
+//        String nombreuni = "";
+//        AdminUniverso au = new AdminUniverso(nombre);
+//    db.conectar();
+//        try {
+//            String n,d;
+//            for (int i = 0; i < au.getUni().get(0).getSeresVivos().size(); i++) {
+//                n = au.getUni().get(0).getSeresVivos().get(i).getNombre();
+//                d = au.getUni().get(0).getSeresVivos().get(i).getUniProcedencia().getNombre();
+//                db.query.execute("INSERT INTO Seres Vivos"
+//                    + " (Nombre,Universo)"
+//                    + " VALUES ('" + n + "', '" + d + "')");
+//            db.commit();
+//            }
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//        db.desconectar();
+//    }
+//    
 }

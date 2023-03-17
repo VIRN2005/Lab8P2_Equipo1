@@ -1,7 +1,9 @@
-
 package lab8p2_equipo1;
 
-public class SerVivo {
+import java.io.Serializable;
+
+public class SerVivo implements Serializable {
+
     private String nombre;
     private int id, poder, anios;
     private Universo UniProcedencia;
@@ -9,8 +11,6 @@ public class SerVivo {
 
     public SerVivo() {
     }
-    
-    
 
     public SerVivo(String nombre, int id, int poder, int anios, Universo UniProcedencia, String raza) {
         this.nombre = nombre;
@@ -71,8 +71,7 @@ public class SerVivo {
 
     @Override
     public String toString() {
-        return nombre ;
+        return nombre;
     }
-    
-    
+
 }

@@ -1,16 +1,19 @@
 package lab8p2_equipo1;
 
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class Main extends javax.swing.JFrame {
-    
+
     public Main() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.pack();
+
+        au.cargarCarpeta();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -154,7 +157,7 @@ public class Main extends javax.swing.JFrame {
         jPanel1.add(jSeparator1);
         jSeparator1.setBounds(0, 140, 630, 0);
 
-        jButton4.setFont(new java.awt.Font("Impact", 0, 48)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
         jButton4.setText("CREAR UNIVERSO!");
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -162,17 +165,17 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton4);
-        jButton4.setBounds(20, 280, 410, 80);
+        jButton4.setBounds(20, 160, 320, 50);
 
-        jButton1.setFont(new java.awt.Font("Impact", 0, 48)); // NOI18N
-        jButton1.setText("Universo a Cargar");
+        jButton1.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
+        jButton1.setText("CREAR SER VIVO");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(20, 370, 410, 80);
+        jButton1.setBounds(20, 220, 320, 50);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lab8p2_equipo1/Images/Samurai.jpg"))); // NOI18N
         jPanel1.add(jLabel2);
@@ -205,7 +208,7 @@ public class Main extends javax.swing.JFrame {
                 anios = Integer.parseInt(jtf_anio.getText());
                 UniProcedencia = universo;
                 raza = jcb_raza.getSelectedItem().toString();
-                
+
                 universo.getSeresVivos().add((new SerVivo(nombre, id, poder, anios, UniProcedencia, raza)));
             }
         }
@@ -214,20 +217,31 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        uni.add(new Universo(JOptionPane.showInputDialog("Ingrese el Universo")));
-        JOptionPane.showMessageDialog(this, "Se ha Agregado el Universo Correctamente!");
+        String nombreUni = JOptionPane.showInputDialog("Ingrese el Universo");
+        Universo u = new Universo(JOptionPane.showInputDialog("Ingrese el Universo"));
+        au = new AdminUniverso("./" + nombreUni + ".jsv");
+
+        au.setUni(u);
+        au.escribirCarpeta();
+        au.cargarCarpeta();
+
+        uni.add(au.getUni());
+        System.out.println(uni);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         if (uni.isEmpty()) {
             JOptionPane.showMessageDialog(this, "AGREGUE UN PINCHE UNIVERSO", "ERROR", 2);
         } else {
+            DefaultComboBoxModel m = new DefaultComboBoxModel();
+            m.addAll(uni);
+            jcb_universo.setModel(m);
             AddSeresVivos.setVisible(true);
 //            AddSeresVivos.pack();
             AddSeresVivos.setLocationRelativeTo(this);
         }
     }//GEN-LAST:event_jButton1MouseClicked
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -290,4 +304,5 @@ public class Main extends javax.swing.JFrame {
     private int id, poder, anios;
     private Universo UniProcedencia;
     private String raza;
+    AdminUniverso au;
 }
