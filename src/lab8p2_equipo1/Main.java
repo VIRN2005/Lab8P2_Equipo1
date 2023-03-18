@@ -1,6 +1,7 @@
 package lab8p2_equipo1;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -13,17 +14,15 @@ public class Main extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.pack();
 
+        au.cargarCarpeta();
+        uni = au.getUni();
         universo = new ArrayList();
 
         for (SerVivo s : au.getUni()) {
-            for (Universo u : universo) {
+            if (universo.contains(s.getUniProcedencia())) {
 
-                if (s.getUniProcedencia().getNombre().equals(u.getNombre())) {
-                    u.getSeresVivos().add(s);
-                } else {
-                    universo.add(s.getUniProcedencia());
-                }
-
+            } else {
+                universo.add(s.getUniProcedencia());
             }
 
         }
@@ -54,6 +53,13 @@ public class Main extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jl_eliminar = new javax.swing.JList<>();
         jButton6 = new javax.swing.JButton();
+        CargarUniverso = new javax.swing.JFrame();
+        jPanel4 = new javax.swing.JPanel();
+        jb_cargar = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        LISTA_UNIVERSOS = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -62,6 +68,7 @@ public class Main extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         AddSeresVivos.setPreferredSize(new java.awt.Dimension(760, 560));
@@ -77,7 +84,6 @@ public class Main extends javax.swing.JFrame {
         jLabel3.setBounds(0, 0, 750, 150);
 
         jLabel4.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Nombre");
         jPanel3.add(jLabel4);
@@ -92,35 +98,30 @@ public class Main extends javax.swing.JFrame {
         jtf_anio.setBounds(40, 330, 692, 30);
 
         jLabel8.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Universo");
         jPanel3.add(jLabel8);
         jLabel8.setBounds(40, 360, 692, 23);
 
         jLabel5.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Poder (del 1 al 10)");
         jPanel3.add(jLabel5);
         jLabel5.setBounds(40, 260, 692, 23);
 
         jLabel6.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Años");
         jPanel3.add(jLabel6);
         jLabel6.setBounds(40, 310, 692, 23);
 
         jLabel7.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("ID");
         jPanel3.add(jLabel7);
         jLabel7.setBounds(40, 210, 692, 23);
 
         jLabel9.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Raza");
         jPanel3.add(jLabel9);
@@ -156,6 +157,11 @@ public class Main extends javax.swing.JFrame {
                 jButton6MouseClicked(evt);
             }
         });
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_eliminarLayout = new javax.swing.GroupLayout(jd_eliminar.getContentPane());
         jd_eliminar.getContentPane().setLayout(jd_eliminarLayout);
@@ -179,6 +185,63 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jButton6)
                 .addContainerGap(8, Short.MAX_VALUE))
         );
+
+        CargarUniverso.setPreferredSize(new java.awt.Dimension(464, 451));
+        CargarUniverso.setSize(new java.awt.Dimension(464, 451));
+        CargarUniverso.getContentPane().setLayout(null);
+
+        jPanel4.setPreferredSize(new java.awt.Dimension(464, 451));
+
+        jb_cargar.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
+        jb_cargar.setText("CARGAR");
+        jb_cargar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_cargarMouseClicked(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("CARGAR UNIVERSO");
+
+        LISTA_UNIVERSOS.setModel(new DefaultListModel());
+        jScrollPane2.setViewportView(LISTA_UNIVERSOS);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(jb_cargar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(44, 44, 44))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jb_cargar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(85, Short.MAX_VALUE))
+        );
+
+        CargarUniverso.getContentPane().add(jPanel4);
+        jPanel4.setBounds(0, 0, 464, 451);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -250,6 +313,16 @@ public class Main extends javax.swing.JFrame {
         jPanel1.add(jButton5);
         jButton5.setBounds(20, 280, 320, 50);
 
+        jButton7.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
+        jButton7.setText("CARGAR UNIVERSO");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jButton7);
+        jButton7.setBounds(20, 400, 320, 50);
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lab8p2_equipo1/Images/Samurai.jpg"))); // NOI18N
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 140, 740, 340);
@@ -273,24 +346,23 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        
-            if (jcb_universo.getSelectedItem().toString().equals(universo)) {
+        for (Universo u : universo) {
+            if (u.getNombre().equals(jcb_universo.getSelectedItem().toString())) {
                 nombre = jtf_nombre.getText();
                 id = Integer.parseInt(jtf_ID.getText());
                 poder = Integer.parseInt(jtf_poder.getText());
                 anios = Integer.parseInt(jtf_anio.getText());
                 UniProcedencia = (Universo) jcb_universo.getSelectedItem();
                 raza = jcb_raza.getSelectedItem().toString();
-                
+
                 SerVivo asd = new SerVivo(nombre, id, poder, anios, UniProcedencia, raza);
                 au.cargarCarpeta();
                 uni = au.getUni();
                 au.setUniversos(asd);
                 au.escribirCarpeta();
-                
-                
-            
+            }
         }
+
         JOptionPane.showMessageDialog(this, "Se ha agregado correctamente");
         AddSeresVivos.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
@@ -298,7 +370,6 @@ public class Main extends javax.swing.JFrame {
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         String nombreUni = JOptionPane.showInputDialog("Ingrese el Universo");
         Universo u = new Universo(JOptionPane.showInputDialog("Ingrese el Universo"));
-        au = new AdminUniverso("./" + nombreUni + ".jsv");
 
         universo.add(u);
 
@@ -344,21 +415,60 @@ public class Main extends javax.swing.JFrame {
                 m.addElement(s);
             }
             jl_eliminar.setModel(m);
-            
+
             au.cargarCarpeta();
-            
+
             File f = new File("./SeresVivos.jsv");
             f.delete();
-            
+
             for (SerVivo s : uni) {
                 au.cargarCarpeta();
                 au.setUniversos(s);
                 au.escribirCarpeta();
             }
             uni = au.getUni();
-            jd_eliminar.setVisible(false);
+            jd_eliminar.dispose();
+
         }
     }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        CargarUniverso.setVisible(true);
+        CargarUniverso.setLocationRelativeTo(this);
+        DefaultListModel modelolista = (DefaultListModel) LISTA_UNIVERSOS.getModel();
+        modelolista.removeAllElements();
+        for (int i = 0; i < universo.size(); i++) {
+            modelolista.addElement(universo.get(i));
+        }
+        LISTA_UNIVERSOS.setModel(modelolista);
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jb_cargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_cargarMouseClicked
+        Dba db = new Dba("./Universos.accdb");
+        Universo nombreuni = LISTA_UNIVERSOS.getSelectedValue();
+        db.conectar();
+        try {
+            String n, d;
+            for (int i = 0; i < au.getUni().size(); i++) {
+                if (au.getUni().get(i).getUniProcedencia().getNombre().equals(nombreuni.getNombre())) {
+                    n = ""+au.getUni().get(i).getNombre();
+                    d = ""+au.getUni().get(i).getUniProcedencia().getNombre();
+                    db.query.execute("INSERT INTO SeresVivos"
+                            + " (Nombre,Universo)"
+                            + " VALUES ('" + n + "', '" + d + "')");
+                    db.commit();
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        db.desconectar();
+        JOptionPane.showMessageDialog(CargarUniverso, "Se Apreto");
+    }//GEN-LAST:event_jb_cargarMouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -394,13 +504,17 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame AddSeresVivos;
+    private javax.swing.JFrame CargarUniverso;
+    private javax.swing.JList<Universo> LISTA_UNIVERSOS;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -412,8 +526,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jb_cargar;
     private javax.swing.JComboBox<String> jcb_raza;
     private javax.swing.JComboBox<Universo> jcb_universo;
     private javax.swing.JDialog jd_eliminar;
