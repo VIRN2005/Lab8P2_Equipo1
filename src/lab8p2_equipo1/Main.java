@@ -444,16 +444,16 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7MouseClicked
 
     private void jb_cargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_cargarMouseClicked
-        Dba db = new Dba("./Universos.mdb");
+        Dba db = new Dba("./Universos.accdb");
         Universo nombreuni = LISTA_UNIVERSOS.getSelectedValue();
         db.conectar();
         try {
             String n, d;
             for (int i = 0; i < au.getUni().size(); i++) {
                 if (au.getUni().get(i).getUniProcedencia().getNombre().equals(nombreuni.getNombre())) {
-                    n = au.getUni().get(i).getNombre();
-                    d = au.getUni().get(i).getUniProcedencia().getNombre();
-                    db.query.execute("INSERT INTO Seres Vivos"
+                    n = ""+au.getUni().get(i).getNombre();
+                    d = ""+au.getUni().get(i).getUniProcedencia().getNombre();
+                    db.query.execute("INSERT INTO SeresVivos"
                             + " (Nombre,Universo)"
                             + " VALUES ('" + n + "', '" + d + "')");
                     db.commit();
@@ -463,6 +463,7 @@ public class Main extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         db.desconectar();
+        JOptionPane.showMessageDialog(CargarUniverso, "Se Apreto");
     }//GEN-LAST:event_jb_cargarMouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
