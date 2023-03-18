@@ -36,20 +36,22 @@ public class administrarBarra extends Thread {
 
     @Override
     public void run() {
-        cant = 100000000 / cant;
-        if (avanzar) {
-            barra.setValue(barra.getValue() + cant);
-            if (barra.getValue() == 100000000) {
-                avanzar = false;
-                JOptionPane.showMessageDialog(null, "Seres Cargados");
-            }
-        } //FIN IF
+        boolean vive = true;
+        while (vive) {
+            if (avanzar) {
+                barra.setValue(barra.getValue() + 1000);
+                if (barra.getValue() == 100000000) {
+                    vive = false;
+                    JOptionPane.showMessageDialog(null, "Seres Cargados");
+                }
+            } //FIN IF
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
+            try {
+                Thread.sleep(0);
+            } catch (InterruptedException ex) {
+            }
         }
-        
+
     }
 
 }
