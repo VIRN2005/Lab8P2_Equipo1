@@ -13,18 +13,18 @@ public class Main extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.pack();
 
+        au.cargarCarpeta();
+        uni = au.getUni();
         universo = new ArrayList();
-
+        
         for (SerVivo s : au.getUni()) {
-            for (Universo u : universo) {
-
-                if (s.getUniProcedencia().getNombre().equals(u.getNombre())) {
-                    u.getSeresVivos().add(s);
-                } else {
-                    universo.add(s.getUniProcedencia());
-                }
-
+            if(universo.contains(s.getUniProcedencia())){
+                
+            }else{
+                universo.add(s.getUniProcedencia());
             }
+            
+            
 
         }
 
@@ -273,8 +273,8 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        
-            if (jcb_universo.getSelectedItem().toString().equals(universo)) {
+        for (Universo u : universo) {
+            if(u.getNombre().equals(jcb_universo.getSelectedItem().toString())){
                 nombre = jtf_nombre.getText();
                 id = Integer.parseInt(jtf_ID.getText());
                 poder = Integer.parseInt(jtf_poder.getText());
@@ -287,10 +287,10 @@ public class Main extends javax.swing.JFrame {
                 uni = au.getUni();
                 au.setUniversos(asd);
                 au.escribirCarpeta();
-                
-                
-            
+            }
         }
+        
+        
         JOptionPane.showMessageDialog(this, "Se ha agregado correctamente");
         AddSeresVivos.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
@@ -298,8 +298,7 @@ public class Main extends javax.swing.JFrame {
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         String nombreUni = JOptionPane.showInputDialog("Ingrese el Universo");
         Universo u = new Universo(JOptionPane.showInputDialog("Ingrese el Universo"));
-        au = new AdminUniverso("./" + nombreUni + ".jsv");
-
+        
         universo.add(u);
 
     }//GEN-LAST:event_jButton4MouseClicked
@@ -356,7 +355,8 @@ public class Main extends javax.swing.JFrame {
                 au.escribirCarpeta();
             }
             uni = au.getUni();
-            jd_eliminar.setVisible(false);
+            jd_eliminar.dispose();
+            
         }
     }//GEN-LAST:event_jButton6MouseClicked
 
