@@ -1,7 +1,9 @@
 package lab8p2_equipo1;
 
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class Main extends javax.swing.JFrame {
@@ -11,7 +13,21 @@ public class Main extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.pack();
 
-        au.cargarCarpeta();
+        universo = new ArrayList();
+
+        for (SerVivo s : au.getUni()) {
+            for (Universo u : universo) {
+
+                if (s.getUniProcedencia().getNombre().equals(u.getNombre())) {
+                    u.getSeresVivos().add(s);
+                } else {
+                    universo.add(s.getUniProcedencia());
+                }
+
+            }
+
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -34,12 +50,18 @@ public class Main extends javax.swing.JFrame {
         jcb_raza = new javax.swing.JComboBox<>();
         jcb_universo = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
+        jd_eliminar = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jl_eliminar = new javax.swing.JList<>();
+        jButton6 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         AddSeresVivos.setPreferredSize(new java.awt.Dimension(760, 560));
@@ -108,7 +130,6 @@ public class Main extends javax.swing.JFrame {
         jPanel3.add(jcb_raza);
         jcb_raza.setBounds(40, 430, 690, 30);
 
-        jcb_universo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel3.add(jcb_universo);
         jcb_universo.setBounds(40, 380, 690, 30);
 
@@ -126,6 +147,38 @@ public class Main extends javax.swing.JFrame {
 
         AddSeresVivos.getContentPane().add(jPanel3);
         jPanel3.setBounds(0, 0, 770, 530);
+
+        jScrollPane1.setViewportView(jl_eliminar);
+
+        jButton6.setText("eliminar");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_eliminarLayout = new javax.swing.GroupLayout(jd_eliminar.getContentPane());
+        jd_eliminar.getContentPane().setLayout(jd_eliminarLayout);
+        jd_eliminarLayout.setHorizontalGroup(
+            jd_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_eliminarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jd_eliminarLayout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(jButton6)
+                .addContainerGap(95, Short.MAX_VALUE))
+        );
+        jd_eliminarLayout.setVerticalGroup(
+            jd_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_eliminarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton6)
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -177,6 +230,26 @@ public class Main extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(20, 220, 320, 50);
 
+        jButton3.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
+        jButton3.setText("ELIMINAR SERVIVO");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jButton3);
+        jButton3.setBounds(20, 340, 320, 50);
+
+        jButton5.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
+        jButton5.setText("MODIFICAR SERVIVO");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jButton5);
+        jButton5.setBounds(20, 280, 320, 50);
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lab8p2_equipo1/Images/Samurai.jpg"))); // NOI18N
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 140, 740, 340);
@@ -200,17 +273,23 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        for (Universo universo : uni) {
-            if (jcb_universo.getSelectedItem().toString().equals(universo.getNombre())) {
+        
+            if (jcb_universo.getSelectedItem().toString().equals(universo)) {
                 nombre = jtf_nombre.getText();
                 id = Integer.parseInt(jtf_ID.getText());
                 poder = Integer.parseInt(jtf_poder.getText());
                 anios = Integer.parseInt(jtf_anio.getText());
-                UniProcedencia = universo;
+                UniProcedencia = (Universo) jcb_universo.getSelectedItem();
                 raza = jcb_raza.getSelectedItem().toString();
-
-                universo.getSeresVivos().add((new SerVivo(nombre, id, poder, anios, UniProcedencia, raza)));
-            }
+                
+                SerVivo asd = new SerVivo(nombre, id, poder, anios, UniProcedencia, raza);
+                au.cargarCarpeta();
+                uni = au.getUni();
+                au.setUniversos(asd);
+                au.escribirCarpeta();
+                
+                
+            
         }
         JOptionPane.showMessageDialog(this, "Se ha agregado correctamente");
         AddSeresVivos.setVisible(false);
@@ -221,26 +300,65 @@ public class Main extends javax.swing.JFrame {
         Universo u = new Universo(JOptionPane.showInputDialog("Ingrese el Universo"));
         au = new AdminUniverso("./" + nombreUni + ".jsv");
 
-        au.setUni(u);
-        au.escribirCarpeta();
-        au.cargarCarpeta();
+        universo.add(u);
 
-        uni.add(au.getUni());
-        System.out.println(uni);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        if (uni.isEmpty()) {
+        if (universo.isEmpty()) {
             JOptionPane.showMessageDialog(this, "AGREGUE UN PINCHE UNIVERSO", "ERROR", 2);
         } else {
             DefaultComboBoxModel m = new DefaultComboBoxModel();
-            m.addAll(uni);
+            m.addAll(universo);
             jcb_universo.setModel(m);
             AddSeresVivos.setVisible(true);
 //            AddSeresVivos.pack();
             AddSeresVivos.setLocationRelativeTo(this);
         }
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        DefaultListModel m = new DefaultListModel();
+        for (SerVivo s : uni) {
+            m.addElement(s);
+        }
+        jl_eliminar.setModel(m);
+
+        jd_eliminar.setModal(true);
+        jd_eliminar.pack();
+        jd_eliminar.setLocationRelativeTo(this);
+        jd_eliminar.setVisible(true);
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        if (jl_eliminar.getSelectedIndex() != -1) {
+            SerVivo a = jl_eliminar.getSelectedValue();
+            uni.remove(a);
+
+            DefaultListModel m = new DefaultListModel();
+            for (SerVivo s : uni) {
+                m.addElement(s);
+            }
+            jl_eliminar.setModel(m);
+            
+            au.cargarCarpeta();
+            
+            File f = new File("./SeresVivos.jsv");
+            f.delete();
+            
+            for (SerVivo s : uni) {
+                au.cargarCarpeta();
+                au.setUniversos(s);
+                au.escribirCarpeta();
+            }
+            uni = au.getUni();
+            jd_eliminar.setVisible(false);
+        }
+    }//GEN-LAST:event_jButton6MouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -278,7 +396,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JFrame AddSeresVivos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -291,18 +412,22 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JComboBox<String> jcb_raza;
-    private javax.swing.JComboBox<String> jcb_universo;
+    private javax.swing.JComboBox<Universo> jcb_universo;
+    private javax.swing.JDialog jd_eliminar;
+    private javax.swing.JList<SerVivo> jl_eliminar;
     private javax.swing.JTextField jtf_ID;
     private javax.swing.JTextField jtf_anio;
     private javax.swing.JTextField jtf_nombre;
     private javax.swing.JTextField jtf_poder;
     // End of variables declaration//GEN-END:variables
-    ArrayList<Universo> uni = new ArrayList();
+    ArrayList<SerVivo> uni = new ArrayList();
+    ArrayList<Universo> universo = new ArrayList();
     private String nombre;
     private int id, poder, anios;
     private Universo UniProcedencia;
     private String raza;
-    AdminUniverso au;
+    AdminUniverso au = new AdminUniverso("./SeresVivos.jsv");
 }

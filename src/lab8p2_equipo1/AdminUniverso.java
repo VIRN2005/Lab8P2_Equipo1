@@ -10,18 +10,18 @@ import java.util.ArrayList;
 
 public class AdminUniverso {
 
-    private Universo uni;
+    private ArrayList<SerVivo> uni = new ArrayList();
     File archivo = null;
 
     public AdminUniverso(String path) {
         archivo = new File(path);
     }
 
-    public Universo getUni() {
+    public ArrayList<SerVivo> getUni() {
         return uni;
     }
 
-    public void setUni(Universo uni) {
+    public void setUni(ArrayList<SerVivo> uni) {
         this.uni = uni;
     }
 
@@ -32,16 +32,23 @@ public class AdminUniverso {
     public void setArchivo(File archivo) {
         this.archivo = archivo;
     }
+    
+    
+
+    public void setUniversos(SerVivo a) {
+        uni.add(a);
+    }
 
     public void cargarCarpeta() {
         try {
-            Universo temp;
+            uni = new ArrayList();
+            SerVivo temp;
             if (archivo.exists()) {
                 FileInputStream entrada = new FileInputStream(archivo);
                 ObjectInputStream objeto = new ObjectInputStream(entrada);
                 try {
-                    while ((temp = (Universo) objeto.readObject()) != null) {
-                        uni = (Universo) objeto.readObject();
+                    while ((temp = (SerVivo) objeto.readObject()) != null) {
+                        uni.add(temp);
                     }
                 } catch (EOFException e) {
                     //encontro el final del archivo
@@ -60,9 +67,9 @@ public class AdminUniverso {
         try {
             fw = new FileOutputStream(archivo);
             bw = new ObjectOutputStream(fw);
-
-            bw.writeObject(uni);
-
+            for (SerVivo     t : uni) {
+                bw.writeObject(t);
+            }
             bw.flush();
         } catch (Exception ex) {
         } finally {
