@@ -60,6 +60,26 @@ public class Main extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         LISTA_UNIVERSOS = new javax.swing.JList<>();
+        jd_modificar = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jl_modificar = new javax.swing.JList<>();
+        jButton8 = new javax.swing.JButton();
+        AddSeresVivos1 = new javax.swing.JFrame();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jtf_nombre1 = new javax.swing.JTextField();
+        jtf_ID1 = new javax.swing.JTextField();
+        jtf_poder1 = new javax.swing.JTextField();
+        jtf_anio1 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jcb_raza1 = new javax.swing.JComboBox<>();
+        jcb_universo1 = new javax.swing.JComboBox<>();
+        jButton9 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -186,7 +206,6 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
-        CargarUniverso.setPreferredSize(new java.awt.Dimension(464, 451));
         CargarUniverso.setSize(new java.awt.Dimension(464, 451));
         CargarUniverso.getContentPane().setLayout(null);
 
@@ -242,6 +261,121 @@ public class Main extends javax.swing.JFrame {
 
         CargarUniverso.getContentPane().add(jPanel4);
         jPanel4.setBounds(0, 0, 464, 451);
+
+        jScrollPane3.setViewportView(jl_modificar);
+
+        jButton8.setText("modificar");
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_modificarLayout = new javax.swing.GroupLayout(jd_modificar.getContentPane());
+        jd_modificar.getContentPane().setLayout(jd_modificarLayout);
+        jd_modificarLayout.setHorizontalGroup(
+            jd_modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_modificarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jd_modificarLayout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(jButton8)
+                .addContainerGap(88, Short.MAX_VALUE))
+        );
+        jd_modificarLayout.setVerticalGroup(
+            jd_modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_modificarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton8)
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
+
+        AddSeresVivos1.setPreferredSize(new java.awt.Dimension(760, 560));
+        AddSeresVivos1.setSize(new java.awt.Dimension(760, 560));
+        AddSeresVivos1.getContentPane().setLayout(null);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setLayout(null);
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lab8p2_equipo1/Images/Samurai.jpg"))); // NOI18N
+        jLabel11.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel5.add(jLabel11);
+        jLabel11.setBounds(0, 0, 750, 150);
+
+        jLabel12.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Nombre");
+        jPanel5.add(jLabel12);
+        jLabel12.setBounds(40, 160, 692, 23);
+        jPanel5.add(jtf_nombre1);
+        jtf_nombre1.setBounds(40, 180, 692, 30);
+        jPanel5.add(jtf_ID1);
+        jtf_ID1.setBounds(40, 230, 692, 30);
+        jPanel5.add(jtf_poder1);
+        jtf_poder1.setBounds(40, 280, 692, 30);
+        jPanel5.add(jtf_anio1);
+        jtf_anio1.setBounds(40, 330, 692, 30);
+
+        jLabel13.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Universo");
+        jPanel5.add(jLabel13);
+        jLabel13.setBounds(40, 360, 692, 23);
+
+        jLabel14.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Poder (del 1 al 10)");
+        jPanel5.add(jLabel14);
+        jLabel14.setBounds(40, 260, 692, 23);
+
+        jLabel15.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Años");
+        jPanel5.add(jLabel15);
+        jLabel15.setBounds(40, 310, 692, 23);
+
+        jLabel16.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("ID");
+        jPanel5.add(jLabel16);
+        jLabel16.setBounds(40, 210, 692, 23);
+
+        jLabel17.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Raza");
+        jPanel5.add(jLabel17);
+        jLabel17.setBounds(40, 410, 692, 23);
+
+        jcb_raza1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Humano", "Amanto" }));
+        jPanel5.add(jcb_raza1);
+        jcb_raza1.setBounds(40, 430, 690, 30);
+
+        jPanel5.add(jcb_universo1);
+        jcb_universo1.setBounds(40, 380, 690, 30);
+
+        jButton9.setBackground(new java.awt.Color(255, 0, 0));
+        jButton9.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(255, 255, 255));
+        jButton9.setText("Agregar Ser Vivo");
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+        });
+        jPanel5.add(jButton9);
+        jButton9.setBounds(260, 470, 250, 50);
+
+        AddSeresVivos1.getContentPane().add(jPanel5);
+        jPanel5.setBounds(0, 0, 770, 530);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -402,7 +536,16 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        DefaultListModel m = new DefaultListModel();
+        for (SerVivo s : uni) {
+            m.addElement(s);
+        }
+        jl_eliminar.setModel(m);
 
+        jd_modificar.setModal(true);
+        jd_modificar.pack();
+        jd_modificar.setLocationRelativeTo(this);
+        jd_modificar.setVisible(true);
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
@@ -469,6 +612,30 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        if (jl_modificar.getSelectedIndex() != -1) {
+            for (SerVivo s : uni) {
+                if (s.equals(jl_modificar.getSelectedValue())) {
+                    
+                    
+                    AddSeresVivos1.pack();
+                    AddSeresVivos1.setLocationRelativeTo(this);
+                    AddSeresVivos1.setVisible(true);
+                }
+            }
+        }
+
+
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9MouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -503,6 +670,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame AddSeresVivos;
+    private javax.swing.JFrame AddSeresVivos1;
     private javax.swing.JFrame CargarUniverso;
     private javax.swing.JList<Universo> LISTA_UNIVERSOS;
     private javax.swing.JButton jButton1;
@@ -512,8 +680,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -526,19 +703,29 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jb_cargar;
     private javax.swing.JComboBox<String> jcb_raza;
+    private javax.swing.JComboBox<String> jcb_raza1;
     private javax.swing.JComboBox<Universo> jcb_universo;
+    private javax.swing.JComboBox<Universo> jcb_universo1;
     private javax.swing.JDialog jd_eliminar;
+    private javax.swing.JDialog jd_modificar;
     private javax.swing.JList<SerVivo> jl_eliminar;
+    private javax.swing.JList<SerVivo> jl_modificar;
     private javax.swing.JTextField jtf_ID;
+    private javax.swing.JTextField jtf_ID1;
     private javax.swing.JTextField jtf_anio;
+    private javax.swing.JTextField jtf_anio1;
     private javax.swing.JTextField jtf_nombre;
+    private javax.swing.JTextField jtf_nombre1;
     private javax.swing.JTextField jtf_poder;
+    private javax.swing.JTextField jtf_poder1;
     // End of variables declaration//GEN-END:variables
     ArrayList<SerVivo> uni = new ArrayList();
     ArrayList<Universo> universo = new ArrayList();
